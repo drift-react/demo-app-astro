@@ -1,0 +1,161 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const plans = [
+  {
+    name: "Starter",
+    price: "$0",
+    period: "forever",
+    bullets: ["Landing + 3 pages", "Static hosting friendly", "Great for class demos"],
+    highlighted: false,
+  },
+  {
+    name: "Team",
+    price: "$12",
+    period: "per seat / month",
+    bullets: ["Everything in Starter", "Pretend SSO", "Pretend analytics"],
+    highlighted: true,
+  },
+  {
+    name: "School",
+    price: "Ask us",
+    period: "volume pricing",
+    bullets: ["For classrooms", "Simple terms", "We reply by email"],
+    highlighted: false,
+  },
+];
+---
+
+<Layout title="Pricing" description="Demo pricing table — replace numbers and bullets with your own story.">
+  <h1>Pricing</h1>
+  <p class="intro">Fake numbers for layout practice. Edit the <code>plans</code> array in <code>src/pages/pricing.astro</code>.</p>
+
+  <div class="plans">
+    {
+      plans.map((plan) => (
+        <article class:list={["plan", { "plan--highlight": plan.highlighted }]}>
+          <h2>{plan.name}</h2>
+          <p class="plan__price">
+            <span>{plan.price}</span>
+            <span class="plan__period">{plan.period}</span>
+          </p>
+          <ul>
+            {plan.bullets.map((b) => (
+              <li>{b}</li>
+            ))}
+          </ul>
+          <a class="plan__cta" href="/contact">
+            {plan.highlighted ? "Start trial" : "Contact sales"}
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+  }
+
+  .intro {
+    color: var(--muted);
+    margin: 0 0 2rem;
+    max-width: 42rem;
+  }
+
+  code {
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.15em 0.35em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .plans {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 700px) {
+    .plans {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+    }
+  }
+
+  .plan {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plan--highlight {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .plan h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.125rem;
+  }
+
+  .plan__price {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .plan__period {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  .plan ul {
+    margin: 0 0 1.25rem;
+    padding-left: 1.1rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    flex: 1;
+  }
+
+  .plan li {
+    margin-bottom: 0.35rem;
+  }
+
+  .plan__cta {
+    display: block;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .plan__cta:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .plan--highlight .plan__cta {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0e12;
+  }
+
+  .plan--highlight .plan__cta:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: #0a0e12;
+  }
+</style>

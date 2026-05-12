@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const features = [
+  {
+    title: "Simple pages",
+    body: "Each route is a file under src/pages. Astro turns that into a URL for you.",
+  },
+  {
+    title: "Shared layout",
+    body: "The header, nav, and footer live in one layout file. Every page wraps its content with that layout.",
+  },
+  {
+    title: "Easy styles",
+    body: "This demo uses a global CSS file plus small style blocks per page. You can switch to Tailwind later if you want.",
+  },
+];
+---
+
+<Layout title="Features" description="What Demo App includes — a learning-focused feature list.">
+  <h1>Features</h1>
+  <p class="intro">Short bullets you can rename or extend. All content is in this one file.</p>
+
+  <ul class="feature-list">
+    {
+      features.map((f) => (
+        <li class="feature-card">
+          <h2>{f.title}</h2>
+          <p>{f.body}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
+
+<style>
+  h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+  }
+
+  .intro {
+    color: var(--muted);
+    margin: 0 0 2rem;
+    max-width: var(--max-width);
+  }
+
+  .feature-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 600px) {
+    .feature-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  .feature-card h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .feature-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+</style>
